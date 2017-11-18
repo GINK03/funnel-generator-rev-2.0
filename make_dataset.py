@@ -6,7 +6,6 @@ cvs = list()
 for line in open('conversions.urls'):
   line = line.strip()
   cvs.append( line )
-
 doi_name = {}
 for line in open('datasetid.txt'):
   line = line.strip()
@@ -16,7 +15,7 @@ for line in open('datasetid.txt'):
 
 doi_data = {}
 doi_fpointer = {}
-names = glob.glob('result-20171118-w2v/part-*')
+names = glob.glob('orig_data/part-*')
 print(names)
 for name in names:
   f = open( name )
@@ -56,8 +55,8 @@ for name in names:
       iscv = any( [ cv in src for cv in cvs ] )
       if iscv is True:
         doi_keywords[doi].append( 'CV' )
-
+    
     for doi, keywords in doi_keywords.items():
       if doi_fpointer.get(doi) is None:
-        doi_fpointer[doi] = open('trains/{}.txt'.format(doi), 'a')
+        doi_fpointer[doi] = open('transformed/{}.txt'.format(doi), 'a')
       doi_fpointer[doi].write( ' '.join(keywords) + '\n' )
